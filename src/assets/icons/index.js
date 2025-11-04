@@ -26,8 +26,31 @@ import arrow from './arrow.svg'
 import contact from './contact.svg'
 import soundon from './soundon.png'
 import soundoff from './soundoff.png'
+import ai from "./ai.svg"
+import iot from "./iot.svg"
+import food from "./food.svg"
+import compiler from "./compiler.svg"
+import fleksa from "./fleksa.svg"
+import aws from "./aws.svg"
+import python from "./python.svg"
+import java from "./java.svg"
+import selenium from "./selenium.svg"
+import firebase from "./firebase.svg"
+// Fixed: Added .svg extension
+import googleCloud from "./googleCloud.svg" 
 
 export {
+    aws,
+    firebase,
+    googleCloud,
+    selenium,
+    java,
+    python,
+    ai,
+    iot,
+    food,
+    fleksa,
+    compiler,
     css,
     express,
     git,

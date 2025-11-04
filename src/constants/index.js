@@ -1,5 +1,11 @@
-import { fleksa } from "../assets/icons";
 import {
+    firebase,
+    googleCloud,
+    python,
+    java,
+    selenium,
+    aws,
+    fleksa,
     car,
     contact,
     css,
@@ -15,12 +21,9 @@ import {
     mui,
     nextjs,
     nodejs,
-    pricewise,
     react,
-    redux,
-    sass,
-    snapgram,
-    summiz,
+    redux, // This was missing from your top import list, but was in your skills array
+    sass, // This was missing from your top import list, but was in your skills array
     tailwindcss,
     threads,
     typescript,
@@ -111,6 +114,37 @@ export const skills = [
         name: "TypeScript",
         type: "Frontend",
     },
+    // --- Added your new skills below ---
+    {
+        imageUrl: python,
+        name: "Python",
+        type: "Backend / AI",
+    },
+    {
+        imageUrl: java,
+        name: "Java",
+        type: "Backend",
+    },
+    {
+        imageUrl: aws,
+        name: "Amazon Web Services",
+        type: "Cloud",
+    },
+    {
+        imageUrl: firebase,
+        name: "Firebase",
+        type: "Database / Backend",
+    },
+    {
+        imageUrl: googleCloud,
+        name: "Google Cloud",
+        type: "Cloud",
+    },
+    {
+        imageUrl: selenium,
+        name: "Selenium",
+        type: "Testing",
+    }
 ];
 
 export const experiences = [

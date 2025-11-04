@@ -18,11 +18,13 @@ export function Sky({ isRotating }) {
     }
   });
 
+  // Use the primitive element when you want to directly embed a complex 3D model or scene
   return (
     <mesh ref={skyRef}>
-      // use the primitive element when you want to directly embed a complex 3D
-      model or scene
       <primitive object={sky.scene} />
     </mesh>
   );
 }
+
+// Preload the sky model for better performance
+useGLTF.preload(skyScene);
