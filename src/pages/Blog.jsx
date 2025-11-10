@@ -39,8 +39,8 @@ Smooth transitions made the UI feel alive, like the objects had their own vibe.
 ### 💡 Key Takeaway
 If you want your portfolio to scream "I'm built different," go 3D — but bring a strong GPU, coffee, and patience.
 
-**Meme moment:**
-<img src="/confused.jpg" alt="3D confusion meme" class="rounded-xl mt-3" />
+
+<img src="/omg.gif" alt="3D confusion meme" class="rounded-xl mt-3" />
 
 > "Why is it always 2 units below the floor?!" 😭
 `,
@@ -52,7 +52,7 @@ If you want your portfolio to scream "I'm built different," go 3D — but bring 
     summary: "Chunking, preloading models, and cutting TTI.",
     content: `
 **TL;DR:** I took my 100MB WebGL build and turned it into something deployable. My Lighthouse score went from *ouch* to *chef's kiss* 💅.
-
+<img src="/joey.gif" alt="WebGL meme" class="rounded-xl mt-3" />
 ### 🧩 1. Chunk It Like It's Hot
 Code-splitting + dynamic imports = smaller bundles.
 Result? My Time To Interactive (TTI) dropped from 7.8s → 2.3s.
@@ -72,8 +72,8 @@ No one needs to see "missing normal map, continuing anyway" in production.
 Add a fake loading bar that jumps 0 → 90% instantly.
 Because users love progress — even when it's fake 😅.
 
-**Meme moment:**
-<img src="https://i.imgur.com/bV1Zk6P.jpeg" alt="WebGL meme" class="rounded-xl mt-3" />
+
+<img src="/brotli.jpg" alt="WebGL meme" class="rounded-xl mt-3" />
 
 > *"You can't defeat me" — WebGL*
 > *"I know, but he can." — Brotli Compression*
@@ -111,8 +111,8 @@ Connected the API, tested endpoints, and watched the summaries roll in from the 
 - Docker makes life easier than debugging dependencies.
 - You can *absolutely* do MLOps on a free-tier EC2 if you have patience (and caffeine).
 
-**Meme moment:**
-<img src="https://i.imgur.com/ZnUQ7yO.jpeg" alt="FlanT5 meme" class="rounded-xl mt-3" />
+
+<img src="/summarize.jpg" alt="FlanT5 meme" class="rounded-xl mt-3" />
 
 > *"Use Pegasus," they said. It'll be fun, they said.*
 > *Meanwhile, my CPU: I'm fighting for my life 😭*
