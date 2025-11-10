@@ -8,6 +8,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 
+// --- Social Icons ---
+import { FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
+
 // ✨ Posts with full content & memes
 const posts = [
   {
@@ -41,7 +44,8 @@ If you want your portfolio to scream "I'm built different," go 3D — but bring 
 
 > "Why is it always 2 units below the floor?!" 😭
 `,
-    twitterUrl: "https://x.com/shxxt_0703/status/1987015806807646380?t=DXLglVLSONcmDFLenSse7A&s=19",
+    twitterUrl:
+      "https://x.com/shxxt_0703/status/1987015806807646380?t=DXLglVLSONcmDFLenSse7A&s=19",
   },
   {
     title: "Optimizing Vite builds for WebGL apps",
@@ -74,11 +78,14 @@ Because users love progress — even when it's fake 😅.
 > *"You can't defeat me" — WebGL*
 > *"I know, but he can." — Brotli Compression*
 `,
-    twitterUrl: "https://x.com/shxxt_0703/status/1987036230979395593?t=7kCjKSwxM1nxS2k-388Lnw&s=19",
+    twitterUrl:
+      "https://x.com/shxxt_0703/status/1987036230979395593?t=7kCjKSwxM1nxS2k-388Lnw&s=19",
   },
   {
-    title: "From Pegasus to Flan-T5: My MLOps Hustle for Text Summarization",
-    summary: "Dockerized, optimized, and deployed on AWS t3.micro — all without a GPU 💀",
+    title:
+      "From Pegasus to Flan-T5: My MLOps Hustle for Text Summarization",
+    summary:
+      "Dockerized, optimized, and deployed on AWS t3.micro — all without a GPU 💀",
     content: `
 **TL;DR:** Started with Pegasus Transformer for text summarization, ended up with Flan-T5 because my laptop's GPU was a myth. Wrapped it all in Docker and shipped it to AWS like a true broke MLOps engineer 🚢.
 
@@ -110,9 +117,9 @@ Connected the API, tested endpoints, and watched the summaries roll in from the 
 > *"Use Pegasus," they said. It'll be fun, they said.*
 > *Meanwhile, my CPU: I'm fighting for my life 😭*
 `,
-    twitterUrl: "https://x.com/shxxt_0703/status/1987030540017672682?t=ELJHFsYGF21nfWdU7QXoPg&s=19",
+    twitterUrl:
+      "https://x.com/shxxt_0703/status/1987030540017672682?t=ELJHFsYGF21nfWdU7QXoPg&s=19",
   },
-  
 ];
 
 const Blog = () => {
@@ -172,18 +179,13 @@ const Blog = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <h2 className="text-2xl font-bold">{selectedPost.title}</h2>
-              {/* FIX 2: Replaced dangerouslySetInnerHTML with ReactMarkdown.
-                - It's safer (prevents XSS attacks).
-                - It correctly parses markdown.
-                - 'rehypeRaw' allows it to render the <img> tags in your content.
-              */}
               <ReactMarkdown
                 className="prose prose-slate mt-4"
                 rehypePlugins={[rehypeRaw]}
               >
                 {selectedPost.content}
               </ReactMarkdown>
-              
+
               <div className="mt-6 flex justify-between items-center">
                 <a
                   href={selectedPost.twitterUrl}
@@ -204,6 +206,39 @@ const Blog = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* --- Social Links Footer --- */}
+      <footer className="flex justify-center gap-8 mt-16 mb-10">
+        <motion.a
+          whileHover={{ scale: 1.1 }}
+          href="https://x.com/shxxt_0703"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:text-blue-500 text-3xl"
+        >
+          <FaTwitter />
+        </motion.a>
+
+        <motion.a
+          whileHover={{ scale: 1.1 }}
+          href="https://www.linkedin.com/in/sheetanshu-gautam-a589aa249"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:text-blue-500 text-3xl"
+        >
+          <FaLinkedin />
+        </motion.a>
+
+        <motion.a
+          whileHover={{ scale: 1.1 }}
+          href="https://www.instagram.com/shxxtanshu?igsh=MXB6Y2p4ZmhucWxuNw=="
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-600 hover:text-blue-500 text-3xl"
+        >
+          <FaInstagram />
+        </motion.a>
+      </footer>
     </section>
   );
 };
