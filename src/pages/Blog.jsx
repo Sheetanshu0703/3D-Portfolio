@@ -1,7 +1,4 @@
 import { useState } from "react";
-// No Link import needed unless you link to a full page
-// import { Link } from "react-router-dom";
-// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 
 // --- Imports for the new markdown renderer ---
@@ -10,14 +7,17 @@ import rehypeRaw from "rehype-raw";
 
 // --- Social Icons ---
 import { FaTwitter, FaLinkedin, FaInstagram } from "react-icons/fa";
+// --- UI/UX Note: Added a clean 'X' icon for the modal ---
+import { X } from "lucide-react";
 
-// ✨ Posts with full content & memes
+// ✨ Posts with new data for a richer UI
 const posts = [
   {
     title: "How I built my 3D portfolio with React Three Fiber",
     summary: "A quick write-up on lessons, pitfalls, and useful patterns.",
-    content: `
-**TL;DR:** I went down the 3D rabbit hole, broke my GPU twice, and came back stronger with a floating astronaut and 60 FPS glory 🚀.
+    tags: ["React Three Fiber", "3D", "WebGL"],
+    readTime: "3 min read",
+    content: `I went down the 3D rabbit hole, broke my GPU twice, and came back stronger with a floating astronaut and 60 FPS glory 🚀.
 
 When I first touched React Three Fiber (R3F), I thought it was just React + some 3D spice. Spoiler: it's React + Blender + math + mild emotional damage.
 But it's *so worth it*.
@@ -40,18 +40,15 @@ Smooth transitions made the UI feel alive, like the objects had their own vibe.
 If you want your portfolio to scream "I'm built different," go 3D — but bring a strong GPU, coffee, and patience.
 
 
-<img src="/omg.gif" alt="3D confusion meme" class="rounded-xl mt-3" />
-
-> "Why is it always 2 units below the floor?!" 😭
-`,
-    twitterUrl:
-      "https://x.com/shxxt_0703/status/1987015806807646380?t=DXLglVLSONcmDFLenSse7A&s=19",
+<img src="/omg.gif" alt="3D confusion meme" class="rounded-xl mt-3" />`, 
+    twitterUrl: "https://x.com/shxxt_0703/status/1987015806807646380?t=DXLglVLSONcmDFLenSse7A&s=19",
   },
   {
     title: "Optimizing Vite builds for WebGL apps",
     summary: "Chunking, preloading models, and cutting TTI.",
-    content: `
-**TL;DR:** I took my 100MB WebGL build and turned it into something deployable. My Lighthouse score went from *ouch* to *chef's kiss* 💅.
+    tags: ["Vite", "Performance", "DevOps"],
+    readTime: "2 min read",
+    content: `I took my 100MB WebGL build and turned it into something deployable. My Lighthouse score went from *ouch* to *chef's kiss* 💅.
 <img src="/joey.gif" alt="WebGL meme" class="rounded-xl mt-3" />
 ### 🧩 1. Chunk It Like It's Hot
 Code-splitting + dynamic imports = smaller bundles.
@@ -73,21 +70,15 @@ Add a fake loading bar that jumps 0 → 90% instantly.
 Because users love progress — even when it's fake 😅.
 
 
-<img src="/brotli.jpg" alt="WebGL meme" class="rounded-xl mt-3" />
-
-> *"You can't defeat me" — WebGL*
-> *"I know, but he can." — Brotli Compression*
-`,
-    twitterUrl:
-      "https://x.com/shxxt_0703/status/1987036230979395593?t=7kCjKSwxM1nxS2k-388Lnw&s=19",
+<img src="/brotli.jpg" alt="WebGL meme" class="rounded-xl mt-3" />`,
+    twitterUrl: "https://x.com/shxxt_0703/status/1987036230979395593?t=7kCjKSwxM1nxS2k-388Lnw&s=19",
   },
   {
-    title:
-      "From Pegasus to Flan-T5: My MLOps Hustle for Text Summarization",
-    summary:
-      "Dockerized, optimized, and deployed on AWS t3.micro — all without a GPU 💀",
-    content: `
-**TL;DR:** Started with Pegasus Transformer for text summarization, ended up with Flan-T5 because my laptop's GPU was a myth. Wrapped it all in Docker and shipped it to AWS like a true broke MLOps engineer 🚢.
+    title: "From Pegasus to Flan-T5: My MLOps Hustle",
+    summary: "Dockerized, optimized, and deployed on AWS t3.micro.",
+    tags: ["MLOps", "AWS", "Docker"],
+    readTime: "3 min read",
+    content: ` Started with Pegasus Transformer for text summarization, ended up with Flan-T5 because my laptop's GPU was a myth. Wrapped it all in Docker and shipped it to AWS like a true broke MLOps engineer 🚢.
 
 ### 🤖 1. When Pegasus Met CPU Reality
 Pegasus was powerful — too powerful.
@@ -115,51 +106,107 @@ Connected the API, tested endpoints, and watched the summaries roll in from the 
 <img src="/summarize.jpg" alt="FlanT5 meme" class="rounded-xl mt-3" />
 
 > *"Use Pegasus," they said. It'll be fun, they said.*
-> *Meanwhile, my CPU: I'm fighting for my life 😭*
-`,
-    twitterUrl:
-      "https://x.com/shxxt_0703/status/1987030540017672682?t=ELJHFsYGF21nfWdU7QXoPg&s=19",
+> *Meanwhile, my CPU: I'm fighting for my life 😭*`, // Your existing content...
+    twitterUrl:  "https://x.com/shxxt_0703/status/1987030540017672682?t=ELJHFsYGF21nfWdU7QXoPg&s=19",
   },
 ];
+
+// --- UI/UX Note: Created a reusable Tag component ---
+const PostTag = ({ children }) => (
+  <span className="text-xs font-medium text-blue-700 bg-blue-100 rounded-full px-3 py-1">
+    {children}
+  </span>
+);
 
 const Blog = () => {
   const [selectedPost, setSelectedPost] = useState(null);
 
   return (
     <section className="max-container">
-      <h1 className="head-text">Blog</h1>
-      <p className="text-slate-500 mt-2">
-        Short reads and threads on things I build.
-      </p>
+      <div className="pb-10 border-b border-slate-200">
+        <h1 className="head-text">My Thoughts</h1>
+        <p className="text-slate-500 mt-2">
+          Short reads, technical deep-dives, and things I'm building.
+        </p>
+        
+        {/* --- HERE ARE THE UPDATED ICONS --- */}
+        <div className="flex justify-start gap-6 mt-5">
+          <motion.a
+            whileHover={{ scale: 1.1, y: -2 }}
+            href="https://x.com/shxxt_0703"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-slate-500 hover:text-blue-600 text-2xl"
+            aria-label="View my Twitter profile"
+          >
+            <FaTwitter />
+          </motion.a>
 
-      {/* Blog list */}
-      <div className="flex flex-col gap-6 mt-10">
+          <motion.a
+            whileHover={{ scale: 1.1, y: -2 }}
+            href="https://www.linkedin.com/in/sheetanshu-gautam-a589aa249"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-slate-500 hover:text-blue-700 text-2xl"
+            aria-label="View my LinkedIn profile"
+          >
+            <FaLinkedin />
+          </motion.a>
+
+          <motion.a
+            whileHover={{ scale: 1.1, y: -2 }}
+            href="https://www.instagram.com/shxxtanshu?igsh=MXB6Y2p4ZmhucWxuNw=="
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-slate-500 hover:text-pink-600 text-2xl"
+            aria-label="View my Instagram profile"
+          >
+            <FaInstagram />
+          </motion.a>
+        </div>
+      </div>
+
+      {/* ... (rest of your component) ... */}
+
+      {/* --- UI/UX Note: Changed from flex-col to a responsive grid.
+          This is the #1 "new age" layout change.
+      */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
         {posts.map((post) => (
           <motion.article
             key={post.title}
-            className="glassmorphism p-5 cursor-pointer hover:shadow-lg transition"
+            // --- UI/UX Note: Ditched glassmorphism for a cleaner, border-based card.
+            // This is more minimal and classy. The hover is subtle but rewarding.
+            className="bg-white border border-slate-200 rounded-xl p-6 cursor-pointer group transition-all duration-300 hover:shadow-lg hover:border-blue-400"
             onClick={() => setSelectedPost(post)}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
           >
-            <h2 className="text-xl font-semibold">{post.title}</h2>
+            {/* --- UI/UX Note: Added tags for scannability --- */}
+            <div className="flex flex-wrap gap-2 mb-4">
+              {post.tags.map((tag) => (
+                <PostTag key={tag}>{tag}</PostTag>
+              ))}
+            </div>
+
+            <h2 className="text-xl font-semibold text-slate-900">
+              {post.title}
+            </h2>
             <p className="text-slate-600 mt-2">{post.summary}</p>
-            <div className="mt-3">
-              <a
-                href={post.twitterUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold text-blue-600"
-                onClick={(e) => e.stopPropagation()} // Good call!
-              >
-                Read on Twitter
-              </a>
+
+            {/* --- UI/UX Note: Clearer CTA + metadata --- */}
+            <div className="flex justify-between items-center mt-5 text-sm">
+              <span className="font-semibold text-blue-600 transition-all group-hover:tracking-wider">
+                Read more →
+              </span>
+              <span className="text-slate-500">{post.readTime}</span>
             </div>
           </motion.article>
         ))}
       </div>
 
-      {/* Expanded blog modal */}
+      {/* --- UI/UX Note: Refined Modal for a "Focused Reading" experience --- */}
       <AnimatePresence>
         {selectedPost && (
           <motion.div
@@ -167,78 +214,64 @@ const Blog = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex justify-center items-center z-50 p-4"
+            // --- UI/UX Note: Lighter backdrop blur is classier ---
+            className="fixed inset-0 bg-black/30 backdrop-blur-md flex justify-center items-center z-50 p-4"
             onClick={() => setSelectedPost(null)}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="bg-white max-w-3xl w-full p-6 rounded-2xl overflow-y-auto max-h-[80vh] shadow-xl"
+              exit={{ scale: 0.95, opacity: 0 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              // --- UI/UX Note: Full-height panel on mobile, contained on desktop.
+              // 'flex-col' allows for a sticky-in-modal header/footer.
+              className="bg-slate-50 rounded-2xl shadow-xl w-full max-w-3xl h-full md:h-auto md:max-h-[85vh] flex flex-col overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              <h2 className="text-2xl font-bold">{selectedPost.title}</h2>
-              <ReactMarkdown
-                className="prose prose-slate mt-4"
-                rehypePlugins={[rehypeRaw]}
-              >
-                {selectedPost.content}
-              </ReactMarkdown>
+              {/* 1. Modal Header */}
+              <div className="flex justify-between items-center p-6 border-b border-slate-200 flex-shrink-0">
+                <h2 className="text-2xl font-bold text-slate-900">
+                  {selectedPost.title}
+                </h2>
+                <button
+                  onClick={() => setSelectedPost(null)}
+                  className="text-slate-500 hover:text-slate-900 transition-colors"
+                  aria-label="Close post"
+                >
+                  <X size={24} />
+                </button>
+              </div>
 
-              <div className="mt-6 flex justify-between items-center">
+              {/* 2. Modal Content (Scrollable) */}
+              <div className="p-6 overflow-y-auto">
+                {/* --- UI/UX Note: 'prose-lg' makes it much more readable --- */}
+                <ReactMarkdown
+                  className="prose prose-lg prose-slate max-w-none"
+                  rehypePlugins={[rehypeRaw]}
+                >
+                  {selectedPost.content}
+                </ReactMarkdown>
+              </div>
+
+              {/* 3. Modal Footer */}
+              <div className="p-6 bg-slate-100 border-t border-slate-200 flex-shrink-0 flex justify-end items-center gap-4">
                 <a
                   href={selectedPost.twitterUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="font-semibold text-blue-600"
                 >
-                  View Thread on Twitter
+                  View on Twitter
                 </a>
-                <button
-                  onClick={() => setSelectedPost(null)}
-                  className="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700"
-                >
-                  Back to Blog
-                </button>
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* --- Social Links Footer --- */}
-      <footer className="flex justify-center gap-8 mt-16 mb-10">
-        <motion.a
-          whileHover={{ scale: 1.1 }}
-          href="https://x.com/shxxt_0703"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 hover:text-blue-500 text-3xl"
-        >
-          <FaTwitter />
-        </motion.a>
-
-        <motion.a
-          whileHover={{ scale: 1.1 }}
-          href="https://www.linkedin.com/in/sheetanshu-gautam-a589aa249"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 hover:text-blue-500 text-3xl"
-        >
-          <FaLinkedin />
-        </motion.a>
-
-        <motion.a
-          whileHover={{ scale: 1.1 }}
-          href="https://www.instagram.com/shxxtanshu?igsh=MXB6Y2p4ZmhucWxuNw=="
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-600 hover:text-blue-500 text-3xl"
-        >
-          <FaInstagram />
-        </motion.a>
-      </footer>
+      {/* --- UI/UX Note: Removed the old social footer.
+          It's now part of the header, which is cleaner.
+      */}
     </section>
   );
 };

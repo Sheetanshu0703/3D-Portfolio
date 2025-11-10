@@ -109,25 +109,25 @@ const Home = () => {
       </Canvas>
 
       {/* 🎵 Music Toggle Icon */}
-      <div className="absolute bottom-6 left-6 sm:bottom-4 sm:left-4 z-20 flex items-center justify-center">
+      <div className="absolute left-1/2 transform -translate-x-1/2 bottom-28 sm:bottom-16 z-50 flex items-center justify-center">
         <div
-          className={`relative w-14 h-14 sm:w-12 sm:h-12 rounded-full flex items-center justify-center cursor-pointer transition-transform duration-300 ${
+          className={`relative w-16 h-16 sm:w-14 sm:h-14 md:w-12 md:h-12 rounded-full flex items-center justify-center cursor-pointer transition-transform duration-300 ${
             isPlayingMusic
               ? "bg-blue-500/20 animate-pulse ring-2 ring-blue-400"
-              : "bg-slate-800/40 hover:bg-slate-700/40"
+              : "bg-slate-800/50 hover:bg-slate-700/40"
           }`}
           onClick={() => setIsPlayingMusic(!isPlayingMusic)}
         >
           <img
             src={!isPlayingMusic ? soundoff : soundon}
             alt="jukebox"
-            className={`w-8 h-8 sm:w-7 sm:h-7 object-contain transition-transform duration-300 ${
+            className={`w-9 h-9 sm:w-8 sm:h-8 object-contain transition-transform duration-300 ${
               isPlayingMusic ? "scale-110 brightness-110" : "opacity-80"
             }`}
           />
           {/* Glow effect */}
           {isPlayingMusic && (
-            <span className="absolute inset-0 rounded-full bg-blue-500/20 blur-md animate-ping" />
+            <span className="absolute inset-0 rounded-full bg-blue-500/25 blur-md animate-ping" />
           )}
         </div>
       </div>
