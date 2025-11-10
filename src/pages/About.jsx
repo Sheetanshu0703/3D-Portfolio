@@ -1,6 +1,7 @@
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import { CTA } from "../components"; // Assuming this path is correct from your project root
-import { experiences, skills } from "../constants"; // Assuming this path is correct
+import { CTA } from "../components";
+import { experiences, skills } from "../assets/constants";
 
 // --- Animation Variants (Your code, looks great!) ---
 const sectionFadeIn = {

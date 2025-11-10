@@ -1,5 +1,5 @@
 import { CTA } from "../components";
-import { projects } from "../constants";
+import { projects } from "../assets/constants";
 import { arrow } from "../assets/icons";
 
 const Projects = () => {

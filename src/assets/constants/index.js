@@ -6,7 +6,6 @@ import {
     selenium,
     aws,
     fleksa,
-    car,
     contact,
     css,
     estate,
@@ -22,16 +21,15 @@ import {
     nextjs,
     nodejs,
     react,
-    redux, // This was missing from your top import list, but was in your skills array
-    sass, // This was missing from your top import list, but was in your skills array
+    redux,
+    sass,
     tailwindcss,
-    threads,
     typescript,
     ai,
     iot,
     food,
     compiler
-} from "../assets/icons";
+} from "../icons";
 
 export const skills = [
     {
@@ -161,7 +159,24 @@ export const experiences = [
             "Collaborated with a cross-functional team to design, test, and deploy the AI model in real-time environments."
         ],
     },
+    {
+        title: "Freelance Web Developer",
+        company_name: "Vairagya.com",
+        icon: estate,
+        iconBg: "#A78BFA",
+        date: "March 2024 - April 2024",
+        points: [
+            "Designed and developed a stunning portfolio website for a professional photographer showcasing their best works through a responsive gallery layout.",
+            "Implemented dynamic like/unlike functionality and personalized favorites using MongoDB for user interaction tracking.",
+            "Integrated a secure payment gateway via UPI and Razorpay for purchasing high-quality prints and digital copies.",
+            "Added a real-time feedback and suggestions section allowing users to share thoughts, reviews, and photo requests.",
+            "Built a smooth, minimalist UI with Tailwind CSS, Framer Motion, and React for immersive browsing and transition effects.",
+            "Implemented lazy loading and optimized image delivery using Cloudinary for faster page performance and SEO ranking.",
+            "Added a photographer booking system allowing clients to schedule shoots directly through the website with email confirmations."
+        ],
+    },
 ];
+
 
 export const socialLinks = [
     {
